@@ -1,0 +1,15 @@
+<div class="products-list w-full">
+    {% for product in products %}
+        <div class="product-card">
+            <img src="{{ product.picture }}" alt="Photo du produit {{ product.name }}">
+            <div class="product-card-details flex-col items-center">
+                <div class="product-card-infos flex-col items-center">
+                    <h3 class="product-card-name">{{ product.name }}</h3>
+                    <p class="product-card-description">{{ product.shortDescription }}</p>
+                </div>
+                <p>{{ product.price }}€</p>
+                <a href="#" class="product-card-button button">Voir le produit</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -18,11 +18,12 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product', name: 'app_product')]
-    public function index(): Response
+    #[Route('/products', name: 'app_products')]
+    public function index(ProductRepository $repo): Response
     {
+        $products = $repo->findAll();
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+            'products' => $products
         ]);
     }
 }

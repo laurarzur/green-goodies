@@ -122,6 +122,10 @@ nav a {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.product-card {
+    background-color: var(--white);
+}
+
 .product-card img {
     height: 474px;
     width: 100%;
@@ -157,7 +161,7 @@ nav a {
 }
 
 .button.product-card-button {
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
     width: 100%;
 }
@@ -203,4 +207,16 @@ nav a {
 
 .values-block p {
     width: 465px;
+}
+
+/** Products page **/
+.products-list-section {
+    background-color: var(--light-beige);
+    padding-top: 80px;
+    gap: 40px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 500;
 }
