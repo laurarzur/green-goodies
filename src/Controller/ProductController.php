@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,18 @@ final class ProductController extends AbstractController
         $products = $repo->findAll();
         return $this->render('product/index.html.twig', [
             'products' => $products
+        ]);
+    }
+
+    #[Route('product/{id}', name: 'app_product')]
+    public function product(?Product $product): Response
+    {
+        if (!$product) {
+            return $this->redirectToRoute('app_products');
+        }
+
+        return $this->render('product/details.html.twig', [
+            'product' => $product
         ]);
     }
 }

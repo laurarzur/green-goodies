@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - GreenGoodies{% endblock %}
+
+{% block body %}
+    <section class="product-section flex-row">
+        <img src="{{ product.picture }}" alt="Photo du produit {{ product.name }}">
+        <div class="product-content w-full flex-col justify-between items-center">
+            <div class="product-details flex-col">
+                <h1>{{ product.name }}</h1>
+                <p class="product-price">{{ product.price }}€</p>
+                <div class="product-description-container flex-col">
+                    <p class="product-description-title">Description</p>
+                    <p class="product-description">{{ product.fullDescription }}</p>
+                </div>
+            </div>
+            <a href="#" class="button">Ajouter au panier</a>
+        </div>
+    </section>
+{% endblock %}

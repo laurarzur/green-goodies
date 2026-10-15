@@ -152,6 +152,7 @@ nav a {
 }
 
 .button {
+    display: block;
     text-align: center;
     width: 479px;
     padding: 30px 0;
@@ -205,7 +206,8 @@ nav a {
     padding: 0 40px 40px 0;
 }
 
-.values-block p {
+.values-block p,
+.product-description-container {
     width: 465px;
 }
 
@@ -219,4 +221,38 @@ nav a {
 h1 {
     font-size: 20px;
     font-weight: 500;
+}
+
+/** Product details page **/
+.product-section {
+    background-color: var(--light-beige);
+    min-height: 84vh;
+}
+
+.product-section img,
+.product-content {
+    height: 686px;
+}
+
+.product-content {
+    padding-top: 80px;
+}
+
+.product-details {
+    gap: 24px;
+}
+
+.product-price {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.product-description-container {
+    margin-top: 26px;
+    color: var(--light-grey);
+    gap: 10px;
+}
+
+.product-description-title {
+    font-size: 10px;
 }
