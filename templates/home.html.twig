@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="welcome-section flex-row items-center">
+        <div class="flex w-full justify-center">
+            <div class="flex-col welcome-block">
+                <h1>Bienvenue</h1>
+                <p class="welcome-paragraph">
+                    Découvrez notre univers de produits durables et éthiques pour une consommation responsable
+                    <br><br>
+                    Retrouvez des articles d’hygiène & beauté, des accessoires & boissons et du prêt à porter
+                </p>
+            </div>
+        </div>
+        <img src="{{ asset('img/photo-by-cherie-birkner.webp') }}" alt="Image décorative montrant des pancartes dans un appartement">
+    </section>
+    <section class="products-section flex-col">
+        <h2 class="home-h2">Nos produits</h2>
+        <div class="products-list">
+            {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.picture }}" alt="Photo du produit {{ product.name }}">
+                    <div class="product-card-details flex-col items-center">
+                        <div class="product-card-infos flex-col items-center">
+                            <h3 class="product-card-name">{{ product.name }}</h3>
+                            <p class="product-card-description">{{ product.shortDescription }}</p>
+                        </div>
+                        <p>{{ product.price }}€</p>
+                        <a href="#" class="product-card-button button">Voir le produit</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="conviction-section flex-row">
+        <div class="conviction-block w-full flex-col justify-end">
+            <h2 class="home-h2">Notre conviction</h2>
+            <p>
+                Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique
+            </p>
+        </div>
+        <img src="{{ asset('img/photo-by-christina-deravedisian.webp') }}" alt="Image décorative montrant une branche fleurie">
+    </section>
+    <section class="values-section flex-row justify-between">
+        <img src="{{ asset('img/photo-by-zaemon.webp') }}" alt="Image décorative montrant un sac poubelle vert">
+        <div class="values-block flex-col justify-end">
+            <h2 class="home-h2">Nos valeurs</h2>
+            <p>
+                Durabilité&nbsp;: Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.
+                <br>
+                Éthique&nbsp;: Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.
+                <br>
+                Écologie&nbsp;: Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.
+            </p>
+        </div>
+    </section>
+{% endblock %}
