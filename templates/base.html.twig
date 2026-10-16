@@ -27,7 +27,7 @@
                 <ul class="main-menu flex-row">
                     {% if not app.user %}
                         <li><a href="#">Connexion</a></li>
-                        <li><a href="#">Inscription</a></li>
+                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
                     {% else %}
                         <li><a href="{{ path('app_products') }}">Nos produits</a></li>
                         <li><a href="#">Mon panier</a></li>
