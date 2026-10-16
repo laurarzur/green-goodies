@@ -256,3 +256,81 @@ h1 {
 .product-description-title {
     font-size: 10px;
 }
+
+/** Register & login **/
+.register-section {
+    background-color: var(--light-beige);
+}
+
+.register-form-block {
+    padding-top: 80px;
+    gap: 24px;
+}
+
+.register-title-block,
+form input {
+    width: 479px;
+}
+
+.register-title-block,
+form div {
+    gap: 10px;
+}
+
+.register-title-block p {
+    font-size: 10px;
+}
+
+.register-title-block p,
+form label,
+form .form-link {
+    color: var(--light-grey);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    padding: 0 20px;
+    height: 67px;
+    border: 1px solid var(--light-grey);
+    background-color: transparent;
+}
+
+form .agree-terms div {
+    flex-direction: row-reverse;
+    align-self: flex-start;
+}
+
+form .agree-terms input {
+    padding: 0;
+    height: 19px;
+    width: 19px;
+}
+
+form .button {
+    border: none;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+form .form-link {
+    text-align: center;
+}
+
+form ul {
+    list-style: none;
+}
+
+form li {
+    color: red;
+}

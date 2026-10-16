@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - GreenGoodies
+{% endblock %}
+
+{% block body %}
+    <section class="register-section flex-row">
+        <img src="{{ asset('img/photo-by-nahil-naseer.webp') }}" alt="Image décorative montrant des feuilles vertes">
+        <div class="register-form-block flex-col w-full items-center">
+            <div class="register-title-block flex-col">
+                <h1>Inscription</h1>
+                <p>Tous les champs sont obligatoires.</p>
+            </div>
+
+            {{ form_errors(form) }}
+
+            {{ form_start(form) }}
+            <div>
+                {{ form_row(form.lastName, {label: 'Nom'}) }}
+            </div>
+            <div>
+                {{ form_row(form.firstName, {label: 'Prénom'}) }}
+            </div>
+            <div>
+                {{ form_row(form.email, {label: 'Adresse email'}) }}
+            </div>
+            <div>
+                {{ form_row(form.plainPassword.first, {label: 'Mot de passe'}) }}
+            </div>
+            <div>
+                {{ form_row(form.plainPassword.second, {label: 'Confirmation mot de passe'}) }}
+            </div>
+            <div class="agree-terms">
+                {{ form_row(form.agreeTerms, {label: 'J’accepte les CGU de GreenGoodies'}) }}
+            </div>
+            <button type="submit" class="button">S'inscrire</button>
+            <a href="#" class="form-link">Déjà un compte&nbsp;? Se connecter</a>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
