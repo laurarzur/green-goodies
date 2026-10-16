@@ -34,7 +34,7 @@
                 {{ form_row(form.agreeTerms, {label: 'J’accepte les CGU de GreenGoodies'}) }}
             </div>
             <button type="submit" class="button">S'inscrire</button>
-            <a href="#" class="form-link">Déjà un compte&nbsp;? Se connecter</a>
+            <a href="{{ path('app_login') }}" class="form-link">Déjà un compte&nbsp;? Se connecter</a>
             {{ form_end(form) }}
         </div>
     </section>

@@ -258,16 +258,19 @@ h1 {
 }
 
 /** Register & login **/
-.register-section {
+.register-section,
+.login-section {
     background-color: var(--light-beige);
 }
 
-.register-form-block {
+.register-form-block,
+.login-form-block {
     padding-top: 80px;
     gap: 24px;
 }
 
 .register-title-block,
+.login-title-block,
 form input {
     width: 479px;
 }
@@ -323,7 +326,8 @@ form .button {
     margin-top: 20px;
 }
 
-form .form-link {
+form .form-link,
+.already-logged-container {
     text-align: center;
 }
 
@@ -331,6 +335,7 @@ form ul {
     list-style: none;
 }
 
-form li {
+form li,
+.alert-danger {
     color: red;
 }
