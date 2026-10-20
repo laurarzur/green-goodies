@@ -8,13 +8,23 @@
         <div class="product-content w-full flex-col justify-between items-center">
             <div class="product-details flex-col">
                 <h1>{{ product.name }}</h1>
-                <p class="product-price">{{ product.price }}€</p>
+                <p class="product-price">{{ product.price|number_format(2, ",", " ") }}€</p>
                 <div class="product-description-container flex-col">
                     <p class="product-description-title">Description</p>
                     <p class="product-description">{{ product.fullDescription }}</p>
                 </div>
             </div>
-            <a href="#" class="button">Ajouter au panier</a>
+            {% if app.user %}
+                {{ form_errors(form) }}
+
+                {{ form_start(form) }}
+                <div class="product-quantity-container">
+                    {{ form_row(form.quantity, {label: 'Quantité'}) }}
+                </div>
+                {{ form_end(form) }}
+            {% else %}
+                <a href="{{ path('app_login') }}" class="button">Se connecter</a>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
