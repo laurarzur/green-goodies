@@ -32,4 +32,19 @@ final class OrderController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+
+    #[Route('cart/confirm', name: 'app_order_confirm')]
+    public function confirmOrder(OrderRepository $repo, EntityManagerInterface $em): Response
+    {
+        $cart = $repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
+
+        if ($cart) {
+            $cart->setIsConfirmed(true);
+            $em->persist($cart);
+            $em->flush();
+            $this->addFlash('success', 'Commande validée');
+        }
+
+        return $this->redirectToRoute('app_cart');
+    }
 }
