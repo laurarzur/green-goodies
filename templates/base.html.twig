@@ -26,17 +26,24 @@
                 </a>
                 <ul class="main-menu flex-row">
                     {% if not app.user %}
-                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                        <li><a href="{{ path('app_login') }}" data-text="Connexion"><span>Connexion</span></a></li>
+                        <li><a href="{{ path('app_register') }}" data-text="Inscription"><span>Inscription</span></a></li>
                     {% else %}
-                        <li><a href="{{ path('app_products') }}">Nos produits</a></li>
-                        <li><a href="#">Mon panier</a></li>
-                        <li><a href="#">Mon compte</a></li>
-                        <li><a href="{{ path('app_login') }}">Déconnexion</a></li>
+                        <li><a href="{{ path('app_products') }}" data-text="Nos produits"><span>Nos produits</span></a></li>
+                        <li><a href="{{ path('app_cart') }}" data-text="Mon panier"><span>Mon panier</span></a></li>
+                        <li><a href="#" data-text="Mon compte"><span>Mon compte</span></a></li>
+                        <li><a href="{{ path('app_logout') }}" data-text="Déconnexion"><span>Déconnexion</span></a></li>
                     {% endif %}
                 </ul>
             </nav>
         </header>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
         <footer class="flex-row justify-end">
             <p>© GreenGoodies - {{ "now"|date('Y') }}</p>

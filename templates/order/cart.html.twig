@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - GreenGoodies{% endblock %}
+
+{% block body %}
+    <section class="cart-section flex-col items-center">
+        <h1>Mon panier</h1>
+        <div class="cart-block-container flex-col items-center">
+            {% if cart is empty %}
+                <p>Votre panier est vide.</p>
+                <a href="{{ path('app_products') }}" class="button">Voir les produits</a>
+            {% else %}
+                <div class="cart-block flex-col w-full">
+                    <a href="#" class="empty-cart">x Vider le panier</a>
+                    {% for item in cart.orderItems %}
+                        <div class="cart-product flex-row items-center">
+                            <img src="{{ item.product.picture }}" alt="Photo du produit {{ item.product.name }}">
+                            <div class="cart-product-details flex-col">
+                                <p class="product-name">{{ item.product.name }}</p>
+                                <p class="product-quantity">Quantité&nbsp;: {{ item.quantity }}</p>
+                                <p class="product-price">
+                                    {{ item.orderItemPrice|number_format(2, ",", " ") }}€
+                                    {% if item.quantity > 1 %}
+                                        <span class="product-unit-price">(Prix unitaire&nbsp;: {{ item.product.price|number_format(2, ",", " ") }}€)</span>
+                                    {% endif %}
+
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="cart-price-block flex-col">
+                        <p class="cart-total-price">Total panier&nbsp;: <span>{{ cart.totalPrice|number_format(2, ",", " ") }}€</span></p>
+                        <p class="cart-shipping">Frais de livraison&nbsp;: Offert</p>
+                    </div>
+                </div>
+                <a href="#" class="button">Valider la commande</a>
+            {% endif %}
+        </div>
+            
+        
+    </section>
+{% endblock %}
