@@ -11,7 +11,7 @@
                 <a href="{{ path('app_products') }}" class="button">Voir les produits</a>
             {% else %}
                 <div class="cart-block flex-col w-full">
-                    <a href="#" class="empty-cart">x Vider le panier</a>
+                    <a href="{{ path('app_cart_delete') }}" class="empty-cart">x Vider le panier</a>
                     {% for item in cart.orderItems %}
                         <div class="cart-product flex-row items-center">
                             <img src="{{ item.product.picture }}" alt="Photo du produit {{ item.product.name }}">
