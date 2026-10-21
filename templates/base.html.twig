@@ -31,7 +31,7 @@
                     {% else %}
                         <li><a href="{{ path('app_products') }}" data-text="Nos produits"><span>Nos produits</span></a></li>
                         <li><a href="{{ path('app_cart') }}" data-text="Mon panier"><span>Mon panier</span></a></li>
-                        <li><a href="#" data-text="Mon compte"><span>Mon compte</span></a></li>
+                        <li><a href="{{ path('app_user') }}" data-text="Mon compte"><span>Mon compte</span></a></li>
                         <li><a href="{{ path('app_logout') }}" data-text="Déconnexion"><span>Déconnexion</span></a></li>
                     {% endif %}
                 </ul>

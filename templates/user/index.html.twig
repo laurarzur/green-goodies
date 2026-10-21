@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - GreenGoodies{% endblock %}
+
+{% block body %}
+    {% set apiAccess = app.user.hasApiAccess %}
+    <section class="account-section flex-col items-center">
+        <h1>Mon compte</h1>
+        <div class="account-blocks-container flex-col items-center">
+            <div class="orders-block w-full flex-col">
+                <h2 class="account-h2">Mes commandes</h2>
+                {% if orders %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>N°</td>
+                                <td>Date</td>
+                                <td>Prix</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.createdAt|date("m/d/Y") }}</td>
+                                    <td>{{ order.totalPrice|number_format(2, ",", " ") }}€</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Vous n'avez pas encore passé de commande.</p>
+                {% endif %}
+            </div>
+            <div class="api-block w-full flex-col">
+                <h2 class="account-h2">Mon accès API</h2>
+                <a href="{{ path(apiAccess ? 'app_user_api_disable' : 'app_user_api_enable') }}" class="button">{{ apiAccess ? 'Désactiver' : 'Activer' }} mon accès API</a>
+            </div>
+            <div class="delete-account-block w-full flex-col">
+                <a href="{{ path('app_user_delete') }}" class="button">Supprimer mon compte</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
