@@ -16,9 +16,14 @@ final class OrderController extends AbstractController
         private EntityManagerInterface $em
     ) {}
 
+    /**
+     * Cette méthode permet d'afficher le panier de l'utilisateur
+     * @return Response
+     */
     #[Route('/cart', name: 'app_cart')]
     public function index(): Response
     {
+        // Seule la commande non confirmée est récupérée car elle correspond au panier
         $cart = $this->repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
 
         return $this->render('order/cart.html.twig', [
@@ -26,6 +31,10 @@ final class OrderController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette méthode permet de vider le panier de l'utilisateur
+     * @return Response
+     */
     #[Route('/cart/delete', name: 'app_cart_delete')]
     public function deleteCart(): Response
     {
@@ -46,9 +55,11 @@ final class OrderController extends AbstractController
 
         if ($cart) {
             $cart->setIsConfirmed(true);
+            // La date est modifiée pour correspondre à la date de la commande et non à la date de création du panier
             $cart->setCreatedAt(new DateTimeImmutable());
             $this->em->persist($cart);
             $this->em->flush();
+            // Comme l'utilisateur sera redirigé vers son panier vide, un message de confirmation est affiché
             $this->addFlash('success', 'Commande validée');
         }
 

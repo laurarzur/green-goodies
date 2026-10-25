@@ -12,10 +12,20 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiProductController extends AbstractController
 {
+    /**
+     * Cette méthode permet d'afficher les produits pour un utilisateur de l'API
+     * @param ProductRepository $repo
+     * @param SerializerInterface $serializer
+     * @param UrlHelper $urlHelper
+     * @return JsonResponse
+     */
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
     public function getProducts(ProductRepository $repo, SerializerInterface $serializer, UrlHelper $urlHelper): JsonResponse
     {
         $products = $repo->findAll();
+
+        /* Pour chaque produit, le chemin de l'image est transformé en URL 
+        Ex : "https://127.0.0.1:8000/img/products/product1.webp" au lieu de "product1.webp" */
         foreach ($products as $product) {
             $product->setPicture($urlHelper->getAbsoluteUrl('/img/products/' . $product->getPicture()));
         }

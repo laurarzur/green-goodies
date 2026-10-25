@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
+
+    // Cette méthode permet d'enregistrer un nouvel utilisateur
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Security $security): Response
     {
@@ -25,13 +27,14 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
+            // Le mot de passe est hashé
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setHasApiAccess(false);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // L'utilisateur est automatiquement connecté après avoir créé son compte
             $security->login($user);
 
             return $this->redirectToRoute('app_home');
