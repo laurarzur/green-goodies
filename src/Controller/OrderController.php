@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OrderRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,10 +11,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class OrderController extends AbstractController
 {
+    public function __construct(
+        private OrderRepository $repo,
+        private EntityManagerInterface $em
+    ) {}
+
     #[Route('/cart', name: 'app_cart')]
-    public function index(OrderRepository $repo): Response
+    public function index(): Response
     {
-        $cart = $repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
+        $cart = $this->repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
 
         return $this->render('order/cart.html.twig', [
             'cart' => $cart
@@ -21,27 +27,28 @@ final class OrderController extends AbstractController
     }
 
     #[Route('/cart/delete', name: 'app_cart_delete')]
-    public function deleteCart(OrderRepository $repo, EntityManagerInterface $em): Response
+    public function deleteCart(): Response
     {
-        $cart = $repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
+        $cart = $this->repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
 
         if ($cart) {
-            $em->remove($cart);
-            $em->flush();
+            $this->em->remove($cart);
+            $this->em->flush();
         }
 
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('cart/confirm', name: 'app_order_confirm')]
-    public function confirmOrder(OrderRepository $repo, EntityManagerInterface $em): Response
+    #[Route('/cart/confirm', name: 'app_order_confirm')]
+    public function confirmOrder(): Response
     {
-        $cart = $repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
+        $cart = $this->repo->findOneBy(['customer' => $this->getUser(), 'isConfirmed' => false]);
 
         if ($cart) {
             $cart->setIsConfirmed(true);
-            $em->persist($cart);
-            $em->flush();
+            $cart->setCreatedAt(new DateTimeImmutable());
+            $this->em->persist($cart);
+            $this->em->flush();
             $this->addFlash('success', 'Commande validée');
         }
 

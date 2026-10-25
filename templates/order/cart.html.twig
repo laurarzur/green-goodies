@@ -8,13 +8,13 @@
         <div class="cart-block-container flex-col items-center">
             {% if cart is empty %}
                 <p>Votre panier est vide.</p>
-                <a href="{{ path('app_products') }}" class="button">Voir les produits</a>
+                <a href="{{ path('app_home') }}" class="button">Voir les produits</a>
             {% else %}
                 <div class="cart-block flex-col w-full">
-                    <a href="{{ path('app_cart_delete') }}" class="empty-cart">x Vider le panier</a>
+                    <a href="{{ path('app_cart_delete') }}" class="empty-cart" data-turbo-prefetch="false">x Vider le panier</a>
                     {% for item in cart.orderItems %}
                         <div class="cart-product flex-row items-center">
-                            <img src="{{ item.product.picture }}" alt="Photo du produit {{ item.product.name }}">
+                            <img src="{{ asset('img/products/' ~ item.product.picture) }}" alt="Photo du produit {{ item.product.name }}" width="142" height="132">
                             <div class="cart-product-details flex-col">
                                 <p class="product-name">{{ item.product.name }}</p>
                                 <p class="product-quantity">Quantité&nbsp;: {{ item.quantity }}</p>
@@ -33,10 +33,8 @@
                         <p class="cart-shipping">Frais de livraison&nbsp;: Offert</p>
                     </div>
                 </div>
-                <a href="{{ path('app_order_confirm') }}" class="button">Valider la commande</a>
+                <a href="{{ path('app_order_confirm') }}" class="button" data-turbo-prefetch="false">Valider la commande</a>
             {% endif %}
         </div>
-            
-        
     </section>
 {% endblock %}

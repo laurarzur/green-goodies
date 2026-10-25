@@ -12,11 +12,25 @@
                 </p>
             </div>
         </div>
-        <img src="{{ asset('img/photo-by-cherie-birkner.webp') }}" alt="Image décorative montrant des pancartes dans un appartement">
+        <img src="{{ asset('img/photo-by-cherie-birkner.webp') }}" alt="Image décorative montrant des pancartes dans un appartement" width="731" height="751">
     </section>
     <section class="products-section flex-col">
         <h2 class="home-h2">Nos produits</h2>
-        {% include 'product/products-list.html.twig' %}
+        <div class="products-list w-full">
+            {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ asset('img/products/' ~ product.picture) }}" alt="Photo du produit {{ product.name }}" loading="lazy" height="474" width="480">
+                    <div class="product-card-details flex-col items-center">
+                        <div class="product-card-infos flex-col items-center">
+                            <h3 class="product-card-name">{{ product.name }}</h3>
+                            <p class="product-card-description">{{ product.shortDescription }}</p>
+                        </div>
+                        <p>{{ product.price|number_format(2, ",", " ") }}€</p>
+                        <a href="{{ path('app_product', {id: product.id}) }}" class="product-card-button button">Voir le produit</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
     <section class="conviction-section flex-row">
         <div class="conviction-block w-full flex-col justify-end">
@@ -25,10 +39,10 @@
                 Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique
             </p>
         </div>
-        <img src="{{ asset('img/photo-by-christina-deravedisian.webp') }}" alt="Image décorative montrant une branche fleurie">
+        <img src="{{ asset('img/photo-by-christina-deravedisian.webp') }}" alt="Image décorative montrant une branche fleurie" loading="lazy" width="487" height="646">
     </section>
     <section class="values-section flex-row justify-between">
-        <img src="{{ asset('img/photo-by-zaemon.webp') }}" alt="Image décorative montrant un sac poubelle vert">
+        <img src="{{ asset('img/photo-by-zaemon.webp') }}" alt="Image décorative montrant un sac poubelle vert" loading="lazy" width="487" height="646">
         <div class="values-block flex-col justify-end">
             <h2 class="home-h2">Nos valeurs</h2>
             <p>
