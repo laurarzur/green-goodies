@@ -4,14 +4,18 @@
 
 {% block body %}
     <section class="product-section flex-row">
-        <img src="{{ product.picture }}" alt="Photo du produit {{ product.name }}">
+        <div class="product-picture-container">
+            <img src="{{ asset('img/products/' ~ product.picture) }}" alt="Photo du produit {{ product.name }}" width="734" height="686">
+        </div>
         <div class="product-content w-full flex-col justify-between items-center">
             <div class="product-details flex-col">
                 <h1>{{ product.name }}</h1>
                 <p class="product-price">{{ product.price|number_format(2, ",", " ") }}€</p>
                 <div class="product-description-container flex-col">
                     <p class="product-description-title">Description</p>
-                    <p class="product-description">{{ product.fullDescription }}</p>
+                    {% for paragraph in product.fullDescription|split("\n\n") %}
+                        <p class="product-description">{{ paragraph }}</p>
+                    {% endfor %}
                 </div>
             </div>
             {% if app.user %}

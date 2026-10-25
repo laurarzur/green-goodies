@@ -266,6 +266,16 @@ h1 {
     min-height: 84vh;
 }
 
+.product-picture-container {
+    width: 734px;
+    min-width: 734px;
+}
+
+.product-section img {
+    width: 100%;
+    object-fit: cover;
+}
+
 .product-section img,
 .product-content {
     height: 686px;

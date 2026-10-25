@@ -10,26 +10,19 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-
-        {# {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphp_hot_reload %}
-            <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
-            <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-            <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %} #}
     </head>
     <body>
         <header>
             <nav class="flex-row justify-between items-center">
                 <a href="{{ path('app_home') }}" id="logo">
-                    <img src="{{ asset('img/logo.webp') }}" alt="Logo Green Goodies">
+                    <img src="{{ asset('img/logo.webp') }}" alt="Logo Green Goodies" width="124" height="19">
                 </a>
                 <ul class="main-menu flex-row">
                     {% if not app.user %}
                         <li><a href="{{ path('app_login') }}" data-text="Connexion"><span>Connexion</span></a></li>
                         <li><a href="{{ path('app_register') }}" data-text="Inscription"><span>Inscription</span></a></li>
                     {% else %}
-                        <li><a href="{{ path('app_products') }}" data-text="Nos produits"><span>Nos produits</span></a></li>
+                        <li><a href="{{ path('app_home') }}" data-text="Nos produits"><span>Nos produits</span></a></li>
                         <li><a href="{{ path('app_cart') }}" data-text="Mon panier"><span>Mon panier</span></a></li>
                         <li><a href="{{ path('app_user') }}" data-text="Mon compte"><span>Mon compte</span></a></li>
                         <li><a href="{{ path('app_logout') }}" data-text="Déconnexion"><span>Déconnexion</span></a></li>
