@@ -9,21 +9,28 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * Cette méthode permet de connecter un utilisateur 
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
+        // S'il y a des erreurs, elles sont récupérées ici
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // Le dernier username (ici, adresse email) de l'utilisateur est aussi récupéré
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // Ces 2 éléments sont passés à la vue si le formulaire doit être réaffiché 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
     }
 
+    // Cette méthode est interceptée par le firewall main
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
