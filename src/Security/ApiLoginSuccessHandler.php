@@ -21,9 +21,10 @@ class ApiLoginSuccessHandler implements AuthenticationSuccessHandlerInterface
     #[Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): ?Response
     {
+        /** @var User $user */
         $user = $token->getUser();
 
-        if (!$user instanceof User || !$user->hasApiAccess()) {
+        if (!$user->hasApiAccess()) {
             return new JsonResponse(['status' => 403, 'message' => "Votre accès API n'est pas activé"], Response::HTTP_FORBIDDEN);
         }
 

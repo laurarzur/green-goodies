@@ -2,6 +2,7 @@
 
 namespace App\Controller\ApiController;
 
+use App\Entity\User;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,6 +23,17 @@ final class ApiProductController extends AbstractController
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
     public function getProducts(ProductRepository $repo, SerializerInterface $serializer, UrlHelper $urlHelper): JsonResponse
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user) {
+            return new JsonResponse(['status' => 401, 'message' => 'Connexion requise'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if (!$user->hasApiAccess()) {
+            return new JsonResponse(['status' => 403, 'message' => "Votre accès API n'est pas activé"], Response::HTTP_FORBIDDEN);
+        }
+
         $products = $repo->findAll();
 
         /* Pour chaque produit, le chemin de l'image est transformé en URL 
